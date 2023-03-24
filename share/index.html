@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS Code Server Console</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #content {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2 {
+            color: lime;
+            font-family: monospace;
+            margin: 0;
+        }
+        h2 {
+            margin-top: 10px;
+        }
+        #instructions {
+            color: lime;
+            font-family: monospace;
+            text-align: left;
+            margin-top: 10px;
+            padding-bottom: 50px;
+            width: 50%;
+        }
+        #backToHub:hover {
+            background-color: rgba(0, 255, 0, 0.8);
+        }
+        #console {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            font-size: 14px;
+            height: 100%;
+            border: 2px solid lime;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+            padding: 10px;
+            word-wrap: break-word;
+        }
+        a {
+            color: #b300b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: black;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: lime;
+            border-radius: 6px;
+        }
+        #console-wrapper {
+            position: relative;
+            width: 80%;
+            height: 100%;
+            display: inline-block;
+        }
+        #console-title {
+            color: lime;
+            font-family: monospace;
+            position: absolute;
+            top: -20px;
+            left: 0;
+        }
+        #backToHub {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            background-color: lime;
+            color: black;
+            font-family: monospace;
+            font-size: 14px;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>FI VS Code Server</h1>
+        <h2>Instructions</h2>
+        <div id="instructions">
+            <ol>
+                <li>Follow the instructions in the console below to grant access to your server.<br></li>
+                <li>Connect to your server in one of two ways:<br></li>
+                <ul>
+                    <li>Option A: follow the instructions in the console and open the VS Code client in your browser<br></li>
+                    <li>Option B: open your local VS Code client on your personal computer and connect to the running server (F1 -> "Remote-Tunnels: Connect to Tunnel...")<br></li>
+                </ul>
+            </ol>
+            More details on these options are given on the <a href="https://wiki.flatironinstitute.org/SCC/Software/VSCode" target="_blank">FI Wiki VS Code page</a>.
+        </div>
+        <div id="console-wrapper">
+            <div id="console-title">HOSTNAME</div>
+            <a href="https://jupyter-dev.flatironinstitute.org/hub/home">
+                <button id="backToHub">Back to Hub</button>
+            </a>
+            <div id="console" contenteditable="false"></div>
+        </div>
+    </div>
+    <script>
+        const consoleElement = document.getElementById('console');
+        const file = 'code-tunnel.log';
+        let lastText = '';
+        
+        function linkify(text) {
+            const urlRegex = /(https?:\/\/[^\s\(\)]+)/g;
+            return text.replace(urlRegex, url => `<a href="${url}" target="_blank">${url}</a>`);
+        }
+        
+        async function streamTextFile(file) {
+            const response = await fetch(file, {cache: 'no-store'});
+            if (response.ok) {
+                const newText = await response.text();
+                if (newText !== lastText) {
+                    lastText = newText;
+                    consoleElement.innerHTML = linkify(newText);
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            }
+        }
+        
+        streamTextFile(file);
+        setInterval(() => {
+            streamTextFile(file);
+        }, 1000); // Poll the file every 1 second
+    </script>
+</body>
+</html>
