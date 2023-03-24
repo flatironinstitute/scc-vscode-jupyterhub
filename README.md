@@ -11,3 +11,14 @@ The JupyterHub launcher config is in a different repo: https://github.com/flatir
 `code` is the VS Code Standalone CLI, from https://code.visualstudio.com/#alt-downloads.
 
 More info about VS Code Server on the wiki: https://wiki.flatironinstitute.org/SCC/Software/VSCode
+
+## Useful commands
+***REMOVED***
+
+*The following pertain to the jupyter-dev test deployment. Replace `jupyter-dev` with `jupyter` to deploy to prod.*
+
+***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
