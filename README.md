@@ -13,6 +13,8 @@ The JupyterHub launcher config is in a different repo: https://github.com/flatir
 More info about VS Code Server on the wiki: https://wiki.flatironinstitute.org/SCC/Software/VSCode
 
 ## Useful commands
+To update the CLI: `./bin/code update`
+
 ***REMOVED***
 
 *The following pertain to the jupyter-dev test deployment. Replace `jupyter-dev` with `jupyter` to deploy to prod.*
