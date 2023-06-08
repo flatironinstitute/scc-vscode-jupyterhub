@@ -12,6 +12,8 @@ mkdir -p $hubdir
 
 sed "s/HOSTNAME/$(hostname -s)/g" $rootdir/share/index.html > $hubdir/index.html
 
+unset "${!SLURM_@}"
+
 $rootdir/bin/code tunnel --name="rusty" --accept-server-license-terms &> $hubdir/code-tunnel.log &
 
 port="${@#--port=}"
