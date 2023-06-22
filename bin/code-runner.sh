@@ -12,9 +12,11 @@ mkdir -p $hubdir
 
 sed "s/HOSTNAME/$(hostname -s)/g" $rootdir/share/index.html > $hubdir/index.html
 
+cp $rootdir/bin/code $hubdir/code
+
 unset "${!SLURM_@}"
 
-$rootdir/bin/code tunnel --name="rusty" --accept-server-license-terms &> $hubdir/code-tunnel.log &
+$hubdir/code tunnel --name="rusty" --accept-server-license-terms &> $hubdir/code-tunnel.log &
 
 port="${@#--port=}"
 python -m http.server $port --directory=$httpdir &
