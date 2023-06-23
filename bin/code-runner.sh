@@ -5,7 +5,7 @@
 rootdir="$(dirname $0)"/..
 # . env.sh
 
-httpdir=/dev/shm/$SLURM_JOB_ID/
+httpdir=$VSCODEHUB_RUNTIME_DIR
 hubdir=$httpdir/user/$USER/
 rm -rf $hubdir
 mkdir -p $hubdir
