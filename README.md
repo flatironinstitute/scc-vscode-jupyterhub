@@ -17,8 +17,6 @@ To update the CLI: `./bin/code update`
 
 ***REMOVED***
 
-*The following pertain to the jupyter-dev test deployment. Replace `jupyter-dev` with `jupyter` to deploy to prod.*
-
 ***REMOVED***
 
 ***REMOVED***
