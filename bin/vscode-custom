@@ -1,7 +1,7 @@
-from pathlib import Path
 import os
 import sys
+from pathlib import Path
 
-runner = Path(__file__).resolve().parent / 'code-runner.sh'
+runner = Path(__file__).resolve().parent / "code-runner.sh"
 
-os.execv('/bin/bash', ['bash', str(runner)] + sys.argv[1:])
+os.execv("/bin/bash", ["bash", str(runner)] + sys.argv[1:])

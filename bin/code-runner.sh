@@ -1,9 +1,9 @@
 #!/bin/bash
 
+# One could activate environment modules here if needed
 # . /etc/profile.d/modules.sh
 
 rootdir="$(dirname $0)"/..
-# . env.sh
 
 httpdir=$VSCODEHUB_RUNTIME_DIR
 hubdir=$httpdir/user/$USER/
